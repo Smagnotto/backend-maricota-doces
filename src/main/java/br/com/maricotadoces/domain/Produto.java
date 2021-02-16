@@ -1,5 +1,6 @@
 package br.com.maricotadoces.domain;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,8 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.maricotadoces.pojo.CreateInsumoPojo;
-import br.com.maricotadoces.pojo.InsumoPojo;
+import br.com.maricotadoces.enums.TipoInsumo;
+import br.com.maricotadoces.pojo.CreateProdutoPojo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,27 +24,23 @@ import lombok.Setter;
  */
 
 @Entity
-@Table(name = "insumo")
+@Table(name = "produto")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Insumo {
+public class Produto {
 
-    public Insumo(Long id, CreateInsumoPojo pojo) {
+    public Produto(Long id, CreateProdutoPojo pojo) {
         this.id = id;
         this.nome = pojo.getNome();
         this.ativo = pojo.getAtivo();
+        this.preco = pojo.getPreco();
     }
 
-    public Insumo(CreateInsumoPojo pojo) {
+    public Produto(CreateProdutoPojo pojo) {
         this.nome = pojo.getNome();
         this.ativo = pojo.getAtivo();
-    }
-
-    public Insumo(InsumoPojo pojo) {
-        this.id = pojo.getId();
-        this.nome = pojo.getNome();
-        this.ativo = pojo.getAtivo();
+        this.preco = pojo.getPreco();
     }
 
     @Id
@@ -56,6 +53,16 @@ public class Insumo {
     @Column(name = "ativo")
     private Boolean ativo = true;
 
-    @OneToMany(mappedBy = "insumo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<InsumoProduto> produtos = new HashSet<>();
+    @Column(name = "preco", precision = 11, scale = 2, nullable = false)
+    private BigDecimal preco;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<InsumoProduto> insumos = new HashSet<>();
+
+    public void addInsumo(Insumo insumo, Long quantidade, TipoInsumo tipo) {
+        InsumoProduto insumoProduto  = new InsumoProduto(this, insumo, quantidade, tipo);
+
+        this.insumos.add(insumoProduto);
+        insumo.getProdutos().add(insumoProduto);
+    }
 }

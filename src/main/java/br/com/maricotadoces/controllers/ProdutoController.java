@@ -1,6 +1,7 @@
 package br.com.maricotadoces.controllers;
 
 import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -15,51 +16,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.maricotadoces.pojo.CreateInsumoPojo;
-import br.com.maricotadoces.pojo.InsumoPojo;
+import br.com.maricotadoces.pojo.CreateProdutoPojo;
+import br.com.maricotadoces.pojo.ProdutoPojo;
 import br.com.maricotadoces.service.GenericService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-/**
- * InsumoController
- */
-
 @RestController
-@RequestMapping("v1/insumos")
-public class InsumoController {
+@RequestMapping("v1/produtos")
+public class ProdutoController {
 
-    private final GenericService<InsumoPojo, CreateInsumoPojo> service;
+    private final GenericService<ProdutoPojo, CreateProdutoPojo> service;
 
-    public InsumoController(GenericService<InsumoPojo, CreateInsumoPojo> service) {
+    public ProdutoController(GenericService<ProdutoPojo, CreateProdutoPojo> service) {
         this.service = service;
     }
 
-    @ApiResponse(code = 200, message = "Retorna uma lista de insumos cadastrados")
+    @ApiResponse(code = 200, message = "Retorna uma lista de produtos cadastrados")
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<InsumoPojo> getAll() {
+    public List<ProdutoPojo> getAll() {
         return service.getAll();
     }
 
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna o insumo cadastrado"),
-            @ApiResponse(code = 404, message = "Id do insumo informado não existe") })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna o produto cadastrado"),
+            @ApiResponse(code = 404, message = "Id do produto informado não existe") })
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public InsumoPojo getById(@PathVariable Long id) {
+    public ProdutoPojo getById(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    @ApiResponse(code = 200, message = "Retorna o insumo criado")
+    @ApiResponse(code = 200, message = "Retorna o produto criado")
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public InsumoPojo create(@RequestBody @Valid CreateInsumoPojo insumoPojo) {
-        return service.create(insumoPojo);
+    public ProdutoPojo create(@RequestBody @Valid CreateProdutoPojo ProdutoPojo) {
+        return service.create(ProdutoPojo);
     }
 
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna o insumo atualizado"),
-            @ApiResponse(code = 404, message = "Id do insumo informado não existe") })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna o produto atualizado"),
+            @ApiResponse(code = 404, message = "Id do produto informado não existe") })
     @PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public InsumoPojo update(@PathVariable Long id, @RequestBody @Valid CreateInsumoPojo insumoPojo) {
-        return service.update(id, insumoPojo);
+    public ProdutoPojo update(@PathVariable Long id, @RequestBody @Valid CreateProdutoPojo ProdutoPojo) {
+        return service.update(id, ProdutoPojo);
     }
 
     @DeleteMapping("{id}")
