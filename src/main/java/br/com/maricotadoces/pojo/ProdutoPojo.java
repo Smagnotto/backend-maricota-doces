@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import br.com.maricotadoces.domain.InsumoProduto;
 import br.com.maricotadoces.domain.Produto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
