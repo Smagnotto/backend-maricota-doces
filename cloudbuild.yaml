@@ -6,5 +6,5 @@ steps:
     entrypoint: mvn
     args: ["package", "-Dmaven.test.skip=true"]
   - name: gcr.io/cloud-builders/docker
-    args: ["build", "-t", "gcr.io/maricota-doces-305313/maricota-doces-backend", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
+    args: ["build", "-t", "gcr.io/maricota-doces-305313/maricota-doces-backend", "--build-arg=JAR_FILE=target/maricota-doces-backend-1.0.0.jar", "."]
 images: ["gcr.io/maricota-doces-305313/maricota-doces-backend"]
