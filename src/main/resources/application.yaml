@@ -1,13 +1,35 @@
+# spring:
+#   profiles:
+#     active: "development"
+
+# ---
+
+# ## PROD
+# spring:
+#   profiles: production
+#   datasource:
+#     url: jdbc:mysql://35.188.45.216:3306/maricota_doces
+#     username: root
+#     password: 5611d2906.
+#     hikari:
+#       maximum-pool-size: 10
+#     driverClassName: com.mysql.jdbc.Driver
+#   jpa:
+#     hibernate:
+#       ddl-auto: none
+#     show-sql: true
+
+# ---
+
+# ## DEV
 spring:
+  # profiles: development
   datasource:
-    # url: jdbc:mysql:///maricota-doces-database?cloudSqlInstance=maricota-doces-305313:us-central1:maricota-doces-database&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=root&password=5611d2906.
+    url: jdbc:mysql://localhost:3306/maricota_doces?serverTimezone=UTC
+    username: root
     password: 5611d2906.
+    drive-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
-  cloud:
-    gcp:
-      sql:
-        database-name: maricota-doces-database
-        instance-connection-name: maricota-doces-305313:us-central1:maricota-doces-database
