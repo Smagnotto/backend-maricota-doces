@@ -25,9 +25,9 @@
 spring:
   # profiles: development
   datasource:
-    url: jdbc:mysql://localhost:3306/maricota_doces?serverTimezone=UTC
+    url: jdbc:mysql:///maricota_doces?cloudSqlInstance=maricota-doces-81756:us-central1:maricota-doces-instance&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=root&password=3759112Dd.
     username: root
-    password: 5611d2906.
+    password: 3759112Dd.
     drive-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
