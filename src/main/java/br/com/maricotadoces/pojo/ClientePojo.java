@@ -1,7 +1,6 @@
 package br.com.maricotadoces.pojo;
 
 import br.com.maricotadoces.domain.Cliente;
-import br.com.maricotadoces.domain.Endereco;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;

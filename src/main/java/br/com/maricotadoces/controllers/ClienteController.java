@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.maricotadoces.pojo.ClientePojo;
 import br.com.maricotadoces.pojo.CreateClientePojo;
-import br.com.maricotadoces.service.GenericService;
 import br.com.maricotadoces.service.ListLikeService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

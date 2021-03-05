@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.maricotadoces.pojo.CreateProdutoPojo;
 import br.com.maricotadoces.pojo.ProdutoPojo;
 import br.com.maricotadoces.service.GenericService;
+import br.com.maricotadoces.service.ListLikeService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -26,14 +28,14 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("v1/produtos")
 public class ProdutoController {
 
-    private final GenericService<ProdutoPojo, CreateProdutoPojo> service;
+    private final ListLikeService<ProdutoPojo, CreateProdutoPojo> service;
 
-    public ProdutoController(GenericService<ProdutoPojo, CreateProdutoPojo> service) {
+    public ProdutoController(ListLikeService<ProdutoPojo, CreateProdutoPojo> service) {
         this.service = service;
     }
 
     @ApiResponse(code = 200, message = "Retorna uma lista de produtos cadastrados")
-    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<ProdutoPojo> getAll() {
         return service.getAll();
     }
@@ -43,6 +45,12 @@ public class ProdutoController {
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ProdutoPojo getById(@PathVariable Long id) {
         return service.findById(id);
+    }
+
+    @ApiResponse(code = 200, message = "Retorna uma lista de clientes cadastrados buscado pelo nome utilizando Like")
+    @GetMapping( produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<ProdutoPojo> getByNome(@RequestParam(value = "nome") String nome) {
+        return service.getAllLike(nome);
     }
 
     @ApiResponse(code = 200, message = "Retorna o produto criado")

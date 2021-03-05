@@ -16,14 +16,16 @@ import br.com.maricotadoces.pojo.InsumoPojo;
 import br.com.maricotadoces.pojo.ProdutoPojo;
 import br.com.maricotadoces.repository.ProdutoRepository;
 import br.com.maricotadoces.service.GenericService;
+import br.com.maricotadoces.service.ListLikeService;
 
 @Service
-public class ProdutoServiceImpl implements GenericService<ProdutoPojo, CreateProdutoPojo> {
+public class ProdutoServiceImpl implements ListLikeService<ProdutoPojo, CreateProdutoPojo> {
 
     private final ProdutoRepository repository;
     private final GenericService<InsumoPojo, CreateInsumoPojo> insumoService;
 
-    public ProdutoServiceImpl(ProdutoRepository repository, GenericService<InsumoPojo, CreateInsumoPojo> insumoService) {
+    public ProdutoServiceImpl(ProdutoRepository repository,
+            GenericService<InsumoPojo, CreateInsumoPojo> insumoService) {
         this.repository = repository;
         this.insumoService = insumoService;
     }
@@ -47,7 +49,7 @@ public class ProdutoServiceImpl implements GenericService<ProdutoPojo, CreatePro
 
         for (CreateInsumoProdutoPojo insumoPojo : produtoPojo.getInsumos()) {
             Insumo insumo = new Insumo(insumoService.findById(insumoPojo.getIdInsumo()));
-            
+
             produto.addInsumo(insumo, insumoPojo.getQuantidade(), insumoPojo.getTipo());
         }
 
@@ -75,5 +77,13 @@ public class ProdutoServiceImpl implements GenericService<ProdutoPojo, CreatePro
 
     private Produto getProdutoById(long id) {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @Override
+    public List<ProdutoPojo> getAllLike(String value) {
+
+        List<Produto> clientes = repository.findByNomeLike("%" + value + "%");
+
+        return clientes.stream().filter(x -> x.getAtivo()).map(ProdutoPojo::new).collect(Collectors.toList());
     }
 }

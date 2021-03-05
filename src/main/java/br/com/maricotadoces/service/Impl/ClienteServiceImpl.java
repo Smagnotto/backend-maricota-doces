@@ -48,7 +48,7 @@ public class ClienteServiceImpl implements ListLikeService<ClientePojo, CreateCl
 
     @Override
     public ClientePojo update(Long id, CreateClientePojo ClientePojo) {
-        Cliente cliente = getClienteById(id);
+        // Cliente cliente = getClienteById(id);
 
         // cliente.setNome(ClientePojo.getNome());
         // cliente.setAtivo(ClientePojo.getAtivo());
