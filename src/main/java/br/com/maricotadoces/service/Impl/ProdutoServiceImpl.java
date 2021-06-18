@@ -81,7 +81,6 @@ public class ProdutoServiceImpl implements ListLikeService<ProdutoPojo, CreatePr
 
     @Override
     public List<ProdutoPojo> getAllLike(String value) {
-
         List<Produto> clientes = repository.findByNomeLike("%" + value + "%");
 
         return clientes.stream().filter(x -> x.getAtivo()).map(ProdutoPojo::new).collect(Collectors.toList());
