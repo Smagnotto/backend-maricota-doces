@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.maricotadoces.domain.Produto;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,18 +23,18 @@ public class ProdutoPojo {
         insumos = produto.getInsumos().stream().map(InsumoProdutoPojo::new).collect(Collectors.toSet());
     }
 
-    @ApiModelProperty(value = "Id do insumo", readOnly = true)
+    @Schema(description = "Id do insumo", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @ApiModelProperty(value = "Nome do insumo", required = true, allowEmptyValue = false, dataType = "texto")
+    @Schema(description = "Nome do insumo", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nome;
 
-    @ApiModelProperty(value = "Insumo ativo", required = true, allowEmptyValue = false, dataType = "boolean")
+    @Schema(description = "Insumo ativo", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean ativo;
 
-    @ApiModelProperty(value = "Preco", required = true, allowEmptyValue = false, dataType = "java.math.BigDecimal")
+    @Schema(description = "Preco", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal preco;
 
-    @ApiModelProperty(value = "Insumos", required = true, allowEmptyValue = false)
+    @Schema(description = "Insumos", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<InsumoProdutoPojo> insumos = new HashSet<>();
 }

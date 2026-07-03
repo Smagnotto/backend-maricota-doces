@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.maricotadoces.domain.InsumoProduto;
 import br.com.maricotadoces.enums.TipoInsumo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,16 +19,16 @@ public class InsumoProdutoPojo {
         this.tipo = insumoProduto.getTipo();
     }
 
-    @ApiModelProperty(value = "Id Vinculo", readOnly = true)
+    @Schema(description = "Id Vinculo", accessMode = Schema.AccessMode.READ_ONLY)
     @JsonProperty("id")
     private Long id;
 
-    @ApiModelProperty(value = "Nome do insumo", required = true, allowEmptyValue = false, dataType = "texto")
+    @Schema(description = "Nome do insumo", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nome;
 
-    @ApiModelProperty(value = "Quantidade", required = true, allowEmptyValue = false, dataType = "java.math.BigDecimal")
+    @Schema(description = "Quantidade", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long quantidade;
 
-    @ApiModelProperty(value = "Tipo", required = true, allowEmptyValue = false, dataType = "java.math.BigDecimal")
+    @Schema(description = "Tipo", requiredMode = Schema.RequiredMode.REQUIRED)
     private TipoInsumo tipo;
 }

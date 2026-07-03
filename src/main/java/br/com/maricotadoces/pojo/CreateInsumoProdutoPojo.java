@@ -3,7 +3,7 @@ package br.com.maricotadoces.pojo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.maricotadoces.enums.TipoInsumo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,13 +11,13 @@ import lombok.Setter;
 @Setter
 public class CreateInsumoProdutoPojo {
     
-    @ApiModelProperty(value = "Id do Insumo", required = true, allowEmptyValue = false)
+    @Schema(description = "Id do Insumo", requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("id_insumo")
     private Long idInsumo;
 
-    @ApiModelProperty(value = "Quantidade do Insumo", required = true, allowEmptyValue = false )
+    @Schema(description = "Quantidade do Insumo", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long quantidade;
 
-    @ApiModelProperty(value = "Tipo do Insumo", required = true, allowEmptyValue = false )
+    @Schema(description = "Tipo do Insumo", requiredMode = Schema.RequiredMode.REQUIRED)
     private TipoInsumo tipo;
 }

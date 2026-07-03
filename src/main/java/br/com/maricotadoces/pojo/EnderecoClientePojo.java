@@ -1,7 +1,7 @@
 package br.com.maricotadoces.pojo;
 
 import br.com.maricotadoces.domain.Endereco;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,18 +17,18 @@ public class EnderecoClientePojo {
         this.numero = endereco.getNumero();
     }
 
-    @ApiModelProperty(value = "Id", readOnly = true)
+    @Schema(description = "Id", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @ApiModelProperty(value = "Nome", required = true, allowEmptyValue = false, dataType = "java.lang.String")
+    @Schema(description = "Nome", requiredMode = Schema.RequiredMode.REQUIRED)
     private String logradouro;
 
-    @ApiModelProperty(value = "CEP", required = true, allowEmptyValue = false, dataType = "java.lang.String")
+    @Schema(description = "CEP", requiredMode = Schema.RequiredMode.REQUIRED)
     private String cep;
 
-    @ApiModelProperty(value = "Numero", required = true, allowEmptyValue = false, dataType = "java.lang.String")
+    @Schema(description = "Numero", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer numero;
 
-    @ApiModelProperty(value = "Complemento", dataType = "java.lang.String")
+    @Schema(description = "Complemento")
     private String complemento;
 }

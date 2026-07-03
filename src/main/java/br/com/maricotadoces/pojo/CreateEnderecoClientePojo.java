@@ -1,6 +1,6 @@
 package br.com.maricotadoces.pojo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,15 +8,15 @@ import lombok.Setter;
 @Setter
 public class CreateEnderecoClientePojo {
 
-    @ApiModelProperty(value = "Nome", required = true, allowEmptyValue = false, dataType = "java.lang.String")
+    @Schema(description = "Nome", requiredMode = Schema.RequiredMode.REQUIRED)
     private String logradouro;
 
-    @ApiModelProperty(value = "CEP", required = true, allowEmptyValue = false, dataType = "java.lang.String")
+    @Schema(description = "CEP", requiredMode = Schema.RequiredMode.REQUIRED)
     private String cep;
 
-    @ApiModelProperty(value = "Numero", required = true, allowEmptyValue = false, dataType = "java.lang.String")
+    @Schema(description = "Numero", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer numero;
 
-    @ApiModelProperty(value = "Complemento", dataType = "java.lang.String")
+    @Schema(description = "Complemento")
     private String complemento;
 }

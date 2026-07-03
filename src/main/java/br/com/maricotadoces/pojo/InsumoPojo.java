@@ -1,7 +1,7 @@
 package br.com.maricotadoces.pojo;
 
 import br.com.maricotadoces.domain.Insumo;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +15,12 @@ public class InsumoPojo {
         this.ativo = insumo.getAtivo();
     }
 
-    @ApiModelProperty(value="Id do insumo", readOnly = true)
+    @Schema(description = "Id do insumo", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @ApiModelProperty(value = "Nome do insumo", required = true, allowEmptyValue = false, dataType = "texto")
+    @Schema(description = "Nome do insumo", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nome;
 
-    @ApiModelProperty(value = "Insumo ativo", required = true, allowEmptyValue = false, dataType = "boolean")
+    @Schema(description = "Insumo ativo", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean ativo;
 }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,15 +12,15 @@ import lombok.Setter;
 @Setter
 public class CreateProdutoPojo {
 
-    @ApiModelProperty(value = "Nome", required = true, allowEmptyValue = false, dataType = "java.lang.String")
+    @Schema(description = "Nome", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nome;
 
-    @ApiModelProperty(value = "Ativo", required = true, allowEmptyValue = false, dataType = "java.lang.Boolean")
+    @Schema(description = "Ativo", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean ativo;
 
-    @ApiModelProperty(value = "Preco", required = true, allowEmptyValue = false, dataType = "java.math.BigDecimal")
+    @Schema(description = "Preco", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal preco;
 
-    @ApiModelProperty(value = "Insumos", required = true, allowEmptyValue = false)
+    @Schema(description = "Insumos", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<CreateInsumoProdutoPojo> insumos = new HashSet<>();
 }

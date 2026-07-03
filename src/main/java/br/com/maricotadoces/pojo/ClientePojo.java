@@ -1,7 +1,7 @@
 package br.com.maricotadoces.pojo;
 
 import br.com.maricotadoces.domain.Cliente;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,13 +16,13 @@ public class ClientePojo {
         cliente.getEnderecos().stream().findFirst().ifPresent(x -> this.endereco = new EnderecoClientePojo(x));
     }
 
-    @ApiModelProperty(value="Id", readOnly = true)
+    @Schema(description = "Id", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @ApiModelProperty(value = "Nome", required = true, allowEmptyValue = false)
+    @Schema(description = "Nome", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nome;
 
-    @ApiModelProperty(value="Endereco", readOnly = true)
+    @Schema(description = "Endereco", accessMode = Schema.AccessMode.READ_ONLY)
     private EnderecoClientePojo endereco;
 
 }
