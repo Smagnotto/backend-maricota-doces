@@ -17,7 +17,7 @@ public class ClientePojo {
         this.id = cliente.getId();
         this.nome = cliente.getNome();
 
-        this.endereco = cliente.getEnderecos().stream().map(EnderecoClientePojo::new).collect(Collectors.toSet());
+        this.enderecos = cliente.getEnderecos().stream().map(EnderecoClientePojo::new).collect(Collectors.toSet());
     }
 
     @Schema(description = "Id", accessMode = Schema.AccessMode.READ_ONLY)
@@ -27,6 +27,6 @@ public class ClientePojo {
     private String nome;
 
     @Schema(description = "Endereco", accessMode = Schema.AccessMode.READ_ONLY)
-    private Set<EnderecoClientePojo> endereco;
+    private Set<EnderecoClientePojo> enderecos;
 
 }

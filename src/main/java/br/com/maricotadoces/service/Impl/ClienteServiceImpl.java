@@ -1,6 +1,9 @@
 package br.com.maricotadoces.service.Impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,7 @@ import br.com.maricotadoces.domain.Cliente;
 import br.com.maricotadoces.domain.Endereco;
 import br.com.maricotadoces.pojo.ClientePojo;
 import br.com.maricotadoces.pojo.CreateClientePojo;
+import br.com.maricotadoces.pojo.CreateEnderecoClientePojo;
 import br.com.maricotadoces.repository.ClienteRepository;
 import br.com.maricotadoces.service.ListLikeService;
 
@@ -49,6 +53,28 @@ public class ClienteServiceImpl implements ListLikeService<ClientePojo, CreateCl
         Cliente cliente = getClienteById(id);
 
         cliente.setNome(clientePojo.getNome());
+
+        Map<Long, Endereco> enderecosExistentes = cliente.getEnderecos().stream()
+                .collect(Collectors.toMap(Endereco::getId, e -> e));
+
+        Set<Endereco> enderecosAtualizados = new HashSet<>();
+        for (CreateEnderecoClientePojo enderecoPojo : clientePojo.getEnderecos()) {
+            Endereco endereco = enderecoPojo.getId() != null ? enderecosExistentes.get(enderecoPojo.getId()) : null;
+
+            if (endereco != null) {
+                endereco.setLogradouro(enderecoPojo.getLogradouro());
+                endereco.setNumero(enderecoPojo.getNumero());
+                endereco.setComplemento(enderecoPojo.getComplemento());
+                endereco.setCep(enderecoPojo.getCep());
+            } else {
+                endereco = new Endereco(enderecoPojo);
+            }
+
+            enderecosAtualizados.add(endereco);
+        }
+
+        cliente.getEnderecos().clear();
+        cliente.getEnderecos().addAll(enderecosAtualizados);
 
         Cliente updateCliente = repository.save(cliente);
         return new ClientePojo(updateCliente);

@@ -29,12 +29,12 @@ public class Cliente {
     public Cliente(Long id, CreateClientePojo pojo) {
         this.id = id;
         this.nome = pojo.getNome();
-        this.enderecos = pojo.getEndereco().stream().map(Endereco::new).collect(Collectors.toSet());
+        this.enderecos = pojo.getEnderecos().stream().map(Endereco::new).collect(Collectors.toSet());
     }
 
     public Cliente(CreateClientePojo pojo) {
         this.nome = pojo.getNome();
-        this.enderecos = pojo.getEndereco().stream().map(Endereco::new).collect(Collectors.toSet());
+        this.enderecos = pojo.getEnderecos().stream().map(Endereco::new).collect(Collectors.toSet());
     }
 
     @Id

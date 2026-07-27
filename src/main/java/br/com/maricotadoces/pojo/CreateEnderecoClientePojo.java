@@ -8,6 +8,9 @@ import lombok.Setter;
 @Setter
 public class CreateEnderecoClientePojo {
 
+    @Schema(description = "Id do endereco existente. Informar apenas em atualizacoes, para manter a mesma referencia")
+    private Long id;
+
     @Schema(description = "Nome", requiredMode = Schema.RequiredMode.REQUIRED)
     private String logradouro;
 
