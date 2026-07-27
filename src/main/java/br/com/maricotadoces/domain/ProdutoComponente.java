@@ -3,8 +3,6 @@ package br.com.maricotadoces.domain;
 import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import br.com.maricotadoces.enums.TipoInsumo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,12 +22,10 @@ import lombok.Setter;
 @Table(name = "produto_componente")
 public class ProdutoComponente {
 
-    public ProdutoComponente(Produto produtoPai, Produto produtoFilho, Long quantidade, TipoInsumo tipo,
-            BigDecimal preco) {
+    public ProdutoComponente(Produto produtoPai, Produto produtoFilho, Long quantidade, BigDecimal preco) {
         this.produtoPai = produtoPai;
         this.produtoFilho = produtoFilho;
         this.quantidade = quantidade;
-        this.tipo = tipo;
         this.preco = preco;
     }
 
@@ -49,7 +44,4 @@ public class ProdutoComponente {
     private Long quantidade;
 
     private BigDecimal preco;
-
-    @Enumerated(EnumType.STRING)
-    private TipoInsumo tipo;
 }

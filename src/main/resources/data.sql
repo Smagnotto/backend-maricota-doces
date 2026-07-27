@@ -50,9 +50,9 @@ INSERT INTO insumo_produto (produto_id, insumo_id, quantidade, preco, tipo) VALU
 -- Combina dois produtos-componentes (Massa e Cobertura) + um insumo direto (decoração).
 -- "preco" aqui é o custo puro (sem margem) do produto-filho no momento do vínculo,
 -- igual ao que ProdutoServiceImpl.montarComponentes grava (produtoFilho.calcularCusto()).
-INSERT INTO produto_componente (produto_pai_id, produto_filho_id, quantidade, preco, tipo) VALUES
-  (3, 1, 1, 12.33, 'KG'),  -- 1x Massa Red Velvet
-  (3, 2, 1, 19.75, 'KG');  -- 1x Cobertura Cream Cheese
+INSERT INTO produto_componente (produto_pai_id, produto_filho_id, quantidade, preco) VALUES
+  (3, 1, 1, 12.33),  -- 1x Massa Red Velvet
+  (3, 2, 1, 19.75);  -- 1x Cobertura Cream Cheese
 
 INSERT INTO insumo_produto (produto_id, insumo_id, quantidade, preco, tipo) VALUES
   (3, 10, 20, 60.00, 'G'); -- 20g de confeitos coloridos para decoração = R$ 1,20

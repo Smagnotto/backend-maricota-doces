@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CreateInsumoProdutoPojo {
     
     @Schema(description = "Id do Insumo", requiredMode = Schema.RequiredMode.REQUIRED)
-    @JsonProperty("id_insumo")
+    @JsonProperty("id")
     private Long idInsumo;
 
     @Schema(description = "Quantidade do Insumo", requiredMode = Schema.RequiredMode.REQUIRED)

@@ -69,8 +69,8 @@ public class Produto {
         insumo.getProdutos().add(insumoProduto);
     }
 
-    public void addComponente(Produto produtoFilho, Long quantidade, TipoInsumo tipo, BigDecimal preco) {
-        ProdutoComponente produtoComponente = new ProdutoComponente(this, produtoFilho, quantidade, tipo, preco);
+    public void addComponente(Produto produtoFilho, Long quantidade, BigDecimal preco) {
+        ProdutoComponente produtoComponente = new ProdutoComponente(this, produtoFilho, quantidade, preco);
 
         this.componentes.add(produtoComponente);
     }

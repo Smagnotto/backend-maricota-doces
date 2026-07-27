@@ -16,7 +16,7 @@ import lombok.Setter;
 public class InsumoProdutoPojo {
 
     public InsumoProdutoPojo(InsumoProduto insumoProduto) {
-        this.id = insumoProduto.getId();
+        this.id = insumoProduto.getInsumo().getId();
         this.nome = insumoProduto.getInsumo().getNome();
         this.quantidade = insumoProduto.getQuantidade();
         this.tipo = insumoProduto.getTipo();
@@ -27,7 +27,7 @@ public class InsumoProdutoPojo {
         this.valor = insumoProduto.getInsumo().getPreco().multiply(quantidadeNaUnidadeDoInsumo);
     }
 
-    @Schema(description = "Id Vinculo", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Id do insumo", accessMode = Schema.AccessMode.READ_ONLY)
     @JsonProperty("id")
     private Long id;
 

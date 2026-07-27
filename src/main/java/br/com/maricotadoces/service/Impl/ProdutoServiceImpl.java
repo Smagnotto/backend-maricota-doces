@@ -135,8 +135,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
             validarCiclo(produto, produtoFilho);
 
-            produto.addComponente(produtoFilho, componentePojo.getQuantidade(), componentePojo.getTipo(),
-                    produtoFilho.calcularCusto());
+            produto.addComponente(produtoFilho, componentePojo.getQuantidade(), produtoFilho.calcularCusto());
         }
     }
 
