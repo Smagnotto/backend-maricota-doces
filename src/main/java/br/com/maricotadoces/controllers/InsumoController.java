@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.maricotadoces.pojo.CreateInsumoPojo;
 import br.com.maricotadoces.pojo.InsumoPojo;
-import br.com.maricotadoces.service.GenericService;
+import br.com.maricotadoces.service.InsumoService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -29,16 +30,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping("v1/insumos")
 public class InsumoController {
 
-    private final GenericService<InsumoPojo, CreateInsumoPojo> service;
+    private final InsumoService service;
 
-    public InsumoController(GenericService<InsumoPojo, CreateInsumoPojo> service) {
+    public InsumoController(InsumoService service) {
         this.service = service;
     }
 
-    @ApiResponse(responseCode = "200", description = "Retorna uma lista de insumos cadastrados")
+    @ApiResponse(responseCode = "200", description = "Retorna uma lista de insumos cadastrados, podendo ser filtrada pelo campo ativo")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<InsumoPojo> getAll() {
-        return service.getAll();
+    public List<InsumoPojo> getAll(@RequestParam(value = "ativo", required = false) Boolean ativo) {
+        return service.getAll(ativo);
     }
 
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retorna o insumo cadastrado"),

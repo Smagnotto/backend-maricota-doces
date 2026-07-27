@@ -11,10 +11,10 @@ import br.com.maricotadoces.domain.Insumo;
 import br.com.maricotadoces.pojo.CreateInsumoPojo;
 import br.com.maricotadoces.pojo.InsumoPojo;
 import br.com.maricotadoces.repository.InsumoRepository;
-import br.com.maricotadoces.service.GenericService;
+import br.com.maricotadoces.service.InsumoService;
 
 @Service
-public class InsumoServiceImpl implements GenericService<InsumoPojo, CreateInsumoPojo> {
+public class InsumoServiceImpl implements InsumoService {
 
     private final InsumoRepository repository;
 
@@ -25,6 +25,15 @@ public class InsumoServiceImpl implements GenericService<InsumoPojo, CreateInsum
     @Override
     public List<InsumoPojo> getAll() {
         List<Insumo> insumos = repository.findAll();
+
+        return insumos.stream()
+                .map(InsumoPojo::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<InsumoPojo> getAll(Boolean ativo) {
+        List<Insumo> insumos = ativo == null ? repository.findAll() : repository.findByAtivo(ativo);
 
         return insumos.stream()
                 .map(InsumoPojo::new)

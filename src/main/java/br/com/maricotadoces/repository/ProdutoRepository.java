@@ -9,5 +9,8 @@ import br.com.maricotadoces.domain.Produto;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     List<Produto> findByNomeLike(String string);
-    
+
+    List<Produto> findByAtivo(Boolean ativo);
+
+
 }

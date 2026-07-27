@@ -34,10 +34,10 @@ public class ProdutoController {
         this.service = service;
     }
 
-    @ApiResponse(responseCode = "200", description = "Retorna uma lista de produtos cadastrados")
+    @ApiResponse(responseCode = "200", description = "Retorna uma lista de produtos cadastrados, podendo ser filtrada pelo campo ativo")
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProdutoPojo> getAll() {
-        return service.getAll();
+    public List<ProdutoPojo> getAll(@RequestParam(value = "ativo", required = false) Boolean ativo) {
+        return service.getAll(ativo);
     }
 
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retorna o produto cadastrado"),

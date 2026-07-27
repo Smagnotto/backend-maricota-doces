@@ -48,6 +48,14 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
+    public List<ProdutoPojo> getAll(Boolean ativo) {
+        List<Produto> produtos = ativo == null ? repository.findAll() : repository.findByAtivo(ativo);
+        BigDecimal margem = margemAtual();
+
+        return produtos.stream().map(p -> new ProdutoPojo(p, margem)).collect(Collectors.toList());
+    }
+
+    @Override
     public ProdutoPojo findById(long id) {
         Produto produto = getProdutoById(id);
         return new ProdutoPojo(produto, margemAtual());
