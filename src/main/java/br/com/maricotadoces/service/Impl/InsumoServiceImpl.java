@@ -51,6 +51,8 @@ public class InsumoServiceImpl implements GenericService<InsumoPojo, CreateInsum
 
         insumo.setNome(insumoPojo.getNome());
         insumo.setAtivo(insumoPojo.getAtivo());
+        insumo.setPreco(insumoPojo.getPreco());
+        insumo.setTipo(insumoPojo.getTipo());
 
         Insumo updateInsumo = repository.save(insumo);
         return new InsumoPojo(updateInsumo);

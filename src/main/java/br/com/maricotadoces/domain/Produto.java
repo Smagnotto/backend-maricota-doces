@@ -59,8 +59,8 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InsumoProduto> insumos = new HashSet<>();
 
-    public void addInsumo(Insumo insumo, Long quantidade, TipoInsumo tipo) {
-        InsumoProduto insumoProduto  = new InsumoProduto(this, insumo, quantidade, tipo);
+    public void addInsumo(Insumo insumo, Long quantidade, TipoInsumo tipo, BigDecimal preco) {
+        InsumoProduto insumoProduto  = new InsumoProduto(this, insumo, quantidade, tipo, preco);
 
         this.insumos.add(insumoProduto);
         insumo.getProdutos().add(insumoProduto);

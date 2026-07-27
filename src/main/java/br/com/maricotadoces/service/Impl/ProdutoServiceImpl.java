@@ -50,7 +50,7 @@ public class ProdutoServiceImpl implements ListLikeService<ProdutoPojo, CreatePr
         for (CreateInsumoProdutoPojo insumoPojo : produtoPojo.getInsumos()) {
             Insumo insumo = new Insumo(insumoService.findById(insumoPojo.getIdInsumo()));
 
-            produto.addInsumo(insumo, insumoPojo.getQuantidade(), insumoPojo.getTipo());
+            produto.addInsumo(insumo, insumoPojo.getQuantidade(), insumoPojo.getTipo(), insumo.getPreco());
         }
 
         Produto produtoSaved = repository.save(produto);

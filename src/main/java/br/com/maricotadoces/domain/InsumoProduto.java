@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.math.BigDecimal;
+
 import br.com.maricotadoces.enums.TipoInsumo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +24,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "insumo_produto")
 public class InsumoProduto {
-    public InsumoProduto(Produto produto, Insumo insumo, Long quantidade, TipoInsumo tipo) {
+    public InsumoProduto(Produto produto, Insumo insumo, Long quantidade, TipoInsumo tipo, BigDecimal preco) {
         this.insumo = insumo;
         this.produto = produto;
         this.quantidade = quantidade;
         this.tipo = tipo;
+        this.preco = preco;
     }
 
     @Id
@@ -42,6 +45,8 @@ public class InsumoProduto {
     private Insumo insumo;
 
     private Long quantidade;
+
+    private BigDecimal preco;
 
     @Enumerated(EnumType.STRING)
     private TipoInsumo tipo;
