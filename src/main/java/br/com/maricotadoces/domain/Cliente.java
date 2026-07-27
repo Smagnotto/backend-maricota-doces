@@ -29,11 +29,13 @@ public class Cliente {
     public Cliente(Long id, CreateClientePojo pojo) {
         this.id = id;
         this.nome = pojo.getNome();
+        this.ativo = pojo.getAtivo();
         this.enderecos = pojo.getEnderecos().stream().map(Endereco::new).collect(Collectors.toSet());
     }
 
     public Cliente(CreateClientePojo pojo) {
         this.nome = pojo.getNome();
+        this.ativo = pojo.getAtivo();
         this.enderecos = pojo.getEnderecos().stream().map(Endereco::new).collect(Collectors.toSet());
     }
 
@@ -43,6 +45,9 @@ public class Cliente {
 
     @Column(name = "nome", nullable = false, length = 30, unique = true)
     private String nome;
+
+    @Column(name = "ativo")
+    private Boolean ativo = true;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Endereco> enderecos = new HashSet<>();

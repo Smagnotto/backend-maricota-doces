@@ -13,6 +13,9 @@ public class CreateClientePojo {
     @Schema(description = "Nome", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nome;
 
+    @Schema(description = "Ativo", requiredMode = Schema.RequiredMode.REQUIRED)
+    private Boolean ativo;
+
     @Schema(description = "Enderecos", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<CreateEnderecoClientePojo> enderecos;
 }

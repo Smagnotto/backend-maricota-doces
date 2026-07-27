@@ -10,4 +10,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByNomeLike(String nome);
 
+    List<Cliente> findByAtivo(Boolean ativo);
+
 }

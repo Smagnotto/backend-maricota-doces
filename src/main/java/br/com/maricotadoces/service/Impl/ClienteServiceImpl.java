@@ -16,10 +16,10 @@ import br.com.maricotadoces.pojo.ClientePojo;
 import br.com.maricotadoces.pojo.CreateClientePojo;
 import br.com.maricotadoces.pojo.CreateEnderecoClientePojo;
 import br.com.maricotadoces.repository.ClienteRepository;
-import br.com.maricotadoces.service.ListLikeService;
+import br.com.maricotadoces.service.ClienteService;
 
 @Service
-public class ClienteServiceImpl implements ListLikeService<ClientePojo, CreateClientePojo> {
+public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository repository;
 
@@ -30,6 +30,13 @@ public class ClienteServiceImpl implements ListLikeService<ClientePojo, CreateCl
     @Override
     public List<ClientePojo> getAll() {
         List<Cliente> clientes = repository.findAll();
+
+        return clientes.stream().map(ClientePojo::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClientePojo> getAll(Boolean ativo) {
+        List<Cliente> clientes = ativo == null ? repository.findAll() : repository.findByAtivo(ativo);
 
         return clientes.stream().map(ClientePojo::new).collect(Collectors.toList());
     }
@@ -53,6 +60,7 @@ public class ClienteServiceImpl implements ListLikeService<ClientePojo, CreateCl
         Cliente cliente = getClienteById(id);
 
         cliente.setNome(clientePojo.getNome());
+        cliente.setAtivo(clientePojo.getAtivo());
 
         Map<Long, Endereco> enderecosExistentes = cliente.getEnderecos().stream()
                 .collect(Collectors.toMap(Endereco::getId, e -> e));

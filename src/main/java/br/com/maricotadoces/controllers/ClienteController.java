@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.maricotadoces.pojo.ClientePojo;
 import br.com.maricotadoces.pojo.CreateClientePojo;
-import br.com.maricotadoces.service.ListLikeService;
+import br.com.maricotadoces.service.ClienteService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -27,16 +27,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping("v1/clientes")
 public class ClienteController {
 
-    private final ListLikeService<ClientePojo, CreateClientePojo> service;
+    private final ClienteService service;
 
-    public ClienteController(ListLikeService<ClientePojo, CreateClientePojo> service) {
+    public ClienteController(ClienteService service) {
         this.service = service;
     }
 
-    @ApiResponse(responseCode = "200", description = "Retorna uma lista de clientes cadastrados")
+    @ApiResponse(responseCode = "200", description = "Retorna uma lista de clientes cadastrados, podendo ser filtrada pelo campo ativo")
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ClientePojo> getAll() {
-        return service.getAll();
+    public List<ClientePojo> getAll(@RequestParam(value = "ativo", required = false) Boolean ativo) {
+        return service.getAll(ativo);
     }
 
 
