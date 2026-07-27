@@ -1,6 +1,7 @@
 package br.com.maricotadoces.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,13 +35,11 @@ public class Produto {
         this.id = id;
         this.nome = pojo.getNome();
         this.ativo = pojo.getAtivo();
-        this.preco = pojo.getPreco();
     }
 
     public Produto(CreateProdutoPojo pojo) {
         this.nome = pojo.getNome();
         this.ativo = pojo.getAtivo();
-        this.preco = pojo.getPreco();
     }
 
     @Id
@@ -59,10 +58,38 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InsumoProduto> insumos = new HashSet<>();
 
+    @OneToMany(mappedBy = "produtoPai", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProdutoComponente> componentes = new HashSet<>();
+
     public void addInsumo(Insumo insumo, Long quantidade, TipoInsumo tipo, BigDecimal preco) {
         InsumoProduto insumoProduto  = new InsumoProduto(this, insumo, quantidade, tipo, preco);
 
         this.insumos.add(insumoProduto);
         insumo.getProdutos().add(insumoProduto);
+    }
+
+    public void addComponente(Produto produtoFilho, Long quantidade, TipoInsumo tipo, BigDecimal preco) {
+        ProdutoComponente produtoComponente = new ProdutoComponente(this, produtoFilho, quantidade, tipo, preco);
+
+        this.componentes.add(produtoComponente);
+    }
+
+    public BigDecimal calcularCusto() {
+        BigDecimal custoInsumos = insumos.stream()
+                .map(ip -> ip.getInsumo().getPreco().multiply(BigDecimal.valueOf(ip.getQuantidade())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal custoComponentes = componentes.stream()
+                .map(pc -> pc.getProdutoFilho().calcularCusto().multiply(BigDecimal.valueOf(pc.getQuantidade())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return custoInsumos.add(custoComponentes);
+    }
+
+    public BigDecimal calcularPreco(BigDecimal margemPercentual) {
+        BigDecimal margem = margemPercentual == null ? BigDecimal.ZERO : margemPercentual;
+        BigDecimal fator = BigDecimal.ONE.add(margem.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP));
+
+        return calcularCusto().multiply(fator).setScale(2, RoundingMode.HALF_UP);
     }
 }

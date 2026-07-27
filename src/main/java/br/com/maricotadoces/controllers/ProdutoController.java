@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.maricotadoces.pojo.CreateProdutoPojo;
+import br.com.maricotadoces.pojo.PrecificacaoPojo;
 import br.com.maricotadoces.pojo.ProdutoPojo;
-import br.com.maricotadoces.service.ListLikeService;
+import br.com.maricotadoces.service.ProdutoService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -27,9 +28,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping("v1/produtos")
 public class ProdutoController {
 
-    private final ListLikeService<ProdutoPojo, CreateProdutoPojo> service;
+    private final ProdutoService service;
 
-    public ProdutoController(ListLikeService<ProdutoPojo, CreateProdutoPojo> service) {
+    public ProdutoController(ProdutoService service) {
         this.service = service;
     }
 
@@ -57,6 +58,12 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.CREATED)
     public ProdutoPojo create(@RequestBody @Valid CreateProdutoPojo ProdutoPojo) {
         return service.create(ProdutoPojo);
+    }
+
+    @ApiResponse(responseCode = "200", description = "Simula o custo e o preço do produto (insumos + componentes) sem persistir")
+    @PostMapping(path = "simular", produces = MediaType.APPLICATION_JSON_VALUE)
+    public PrecificacaoPojo simular(@RequestBody @Valid CreateProdutoPojo produtoPojo) {
+        return service.simular(produtoPojo);
     }
 
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retorna o produto atualizado"),

@@ -14,13 +14,16 @@ import lombok.Setter;
 @Setter
 public class ProdutoPojo {
 
-    public ProdutoPojo(Produto produto) {
+    public ProdutoPojo(Produto produto, BigDecimal margemPercentual) {
         this.id = produto.getId();
         this.nome = produto.getNome();
         this.ativo = produto.getAtivo();
-        this.preco = produto.getPreco();
+        this.custo = produto.calcularCusto();
+        this.margemPercentual = margemPercentual;
+        this.preco = produto.calcularPreco(margemPercentual);
 
         insumos = produto.getInsumos().stream().map(InsumoProdutoPojo::new).collect(Collectors.toSet());
+        componentes = produto.getComponentes().stream().map(ProdutoComponentePojo::new).collect(Collectors.toSet());
     }
 
     @Schema(description = "Id do insumo", accessMode = Schema.AccessMode.READ_ONLY)
@@ -32,9 +35,18 @@ public class ProdutoPojo {
     @Schema(description = "Insumo ativo", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean ativo;
 
-    @Schema(description = "Preco", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Custo (soma dos insumos e produtos componentes)", accessMode = Schema.AccessMode.READ_ONLY)
+    private BigDecimal custo;
+
+    @Schema(description = "Margem de lucro (%) aplicada, definida em /v1/configuracoes", accessMode = Schema.AccessMode.READ_ONLY)
+    private BigDecimal margemPercentual;
+
+    @Schema(description = "Preco (custo + margem)", accessMode = Schema.AccessMode.READ_ONLY)
     private BigDecimal preco;
 
     @Schema(description = "Insumos", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<InsumoProdutoPojo> insumos = new HashSet<>();
+
+    @Schema(description = "Produtos componentes", requiredMode = Schema.RequiredMode.REQUIRED)
+    private Set<ProdutoComponentePojo> componentes = new HashSet<>();
 }

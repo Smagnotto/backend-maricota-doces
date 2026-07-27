@@ -1,6 +1,5 @@
 package br.com.maricotadoces.pojo;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,9 +17,9 @@ public class CreateProdutoPojo {
     @Schema(description = "Ativo", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean ativo;
 
-    @Schema(description = "Preco", requiredMode = Schema.RequiredMode.REQUIRED)
-    private BigDecimal preco;
-
     @Schema(description = "Insumos", requiredMode = Schema.RequiredMode.REQUIRED)
     private Set<CreateInsumoProdutoPojo> insumos = new HashSet<>();
+
+    @Schema(description = "Produtos componentes (ex: uma massa usada dentro de um bolo)", requiredMode = Schema.RequiredMode.REQUIRED)
+    private Set<CreateProdutoComponentePojo> componentes = new HashSet<>();
 }
