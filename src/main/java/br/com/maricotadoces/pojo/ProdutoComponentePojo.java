@@ -20,7 +20,9 @@ public class ProdutoComponentePojo {
         this.nome = produtoComponente.getProdutoFilho().getNome();
         this.quantidade = produtoComponente.getQuantidade();
         this.tipo = produtoComponente.getTipo();
-        this.preco = produtoComponente.getPreco();
+
+        BigDecimal custoAtualDoComponente = produtoComponente.getProdutoFilho().calcularCusto();
+        this.valor = custoAtualDoComponente.multiply(BigDecimal.valueOf(produtoComponente.getQuantidade()));
     }
 
     @Schema(description = "Id Vinculo", accessMode = Schema.AccessMode.READ_ONLY)
@@ -39,6 +41,6 @@ public class ProdutoComponentePojo {
     @Schema(description = "Tipo", requiredMode = Schema.RequiredMode.REQUIRED)
     private TipoInsumo tipo;
 
-    @Schema(description = "Custo do produto componente no momento do vínculo", accessMode = Schema.AccessMode.READ_ONLY)
-    private BigDecimal preco;
+    @Schema(description = "Valor total (quantidade x custo atual do produto componente)", accessMode = Schema.AccessMode.READ_ONLY)
+    private BigDecimal valor;
 }

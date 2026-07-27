@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 import br.com.maricotadoces.enums.TipoInsumo;
 import br.com.maricotadoces.pojo.CreateProdutoPojo;
+import br.com.maricotadoces.util.ConversorUnidade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -76,7 +77,12 @@ public class Produto {
 
     public BigDecimal calcularCusto() {
         BigDecimal custoInsumos = insumos.stream()
-                .map(ip -> ip.getInsumo().getPreco().multiply(BigDecimal.valueOf(ip.getQuantidade())))
+                .map(ip -> {
+                    BigDecimal quantidadeNaUnidadeDoInsumo = ConversorUnidade.converterQuantidade(
+                            BigDecimal.valueOf(ip.getQuantidade()), ip.getTipo(), ip.getInsumo().getTipo());
+
+                    return ip.getInsumo().getPreco().multiply(quantidadeNaUnidadeDoInsumo);
+                })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal custoComponentes = componentes.stream()

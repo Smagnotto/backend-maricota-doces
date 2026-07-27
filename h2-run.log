@@ -1,0 +1,128 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< br.com.maricotadoces:maricota-doces >-----------------
+[INFO] Building maricota-doces 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot-maven-plugin:3.5.16:run (default-cli) > test-compile @ maricota-doces >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ maricota-doces ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.14.1:compile (default-compile) @ maricota-doces ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ maricota-doces ---
+[INFO] skip non existing resourceDirectory C:\repositorios\backend-maricota-doces\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.14.1:testCompile (default-testCompile) @ maricota-doces ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot-maven-plugin:3.5.16:run (default-cli) < test-compile @ maricota-doces <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:3.5.16:run (default-cli) @ maricota-doces ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-07-27T17:14:56.542-03:00  INFO 43704 --- [           main] b.c.m.MaricotaDocesApplication           : Starting MaricotaDocesApplication using Java 21.0.11 with PID 43704 (C:\repositorios\backend-maricota-doces\target\classes started by diego in C:\repositorios\backend-maricota-doces)
+2026-07-27T17:14:56.544-03:00  INFO 43704 --- [           main] b.c.m.MaricotaDocesApplication           : The following 1 profile is active: "h2"
+2026-07-27T17:14:57.127-03:00  INFO 43704 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-27T17:14:57.177-03:00  INFO 43704 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 4 JPA repository interfaces.
+2026-07-27T17:14:57.555-03:00  INFO 43704 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-07-27T17:14:57.567-03:00  INFO 43704 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-27T17:14:57.567-03:00  INFO 43704 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.55]
+2026-07-27T17:14:57.628-03:00  INFO 43704 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-27T17:14:57.630-03:00  INFO 43704 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1055 ms
+2026-07-27T17:14:57.732-03:00  INFO 43704 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-27T17:14:57.770-03:00  INFO 43704 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.53.Final
+2026-07-27T17:14:57.795-03:00  INFO 43704 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-27T17:14:58.004-03:00  INFO 43704 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-27T17:14:58.027-03:00  INFO 43704 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-27T17:14:58.171-03:00  INFO 43704 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maricota_doces user=SA
+2026-07-27T17:14:58.172-03:00  INFO 43704 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-27T17:14:58.214-03:00  INFO 43704 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-27T17:14:59.015-03:00  INFO 43704 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists cliente cascade 
+Hibernate: drop table if exists cliente_enderecos cascade 
+Hibernate: drop table if exists configuracao cascade 
+Hibernate: drop table if exists endereco_cliente cascade 
+Hibernate: drop table if exists insumo cascade 
+Hibernate: drop table if exists insumo_produto cascade 
+Hibernate: drop table if exists produto cascade 
+Hibernate: drop table if exists produto_componente cascade 
+Hibernate: create table cliente (id bigint generated by default as identity, nome varchar(30) not null unique, primary key (id))
+Hibernate: create table cliente_enderecos (cliente_id bigint not null, enderecos_id bigint not null unique, primary key (cliente_id, enderecos_id))
+Hibernate: create table configuracao (margem_percentual numeric(5,2) not null, id bigint not null, primary key (id))
+Hibernate: create table endereco_cliente (numero integer not null, cep varchar(8) not null, id bigint generated by default as identity, complemento varchar(60), logradouro varchar(100) not null, primary key (id))
+Hibernate: create table insumo (ativo boolean, preco numeric(38,2) not null, id bigint generated by default as identity, nome varchar(100) not null unique, tipo enum ('G','KG','L','ML') not null, primary key (id))
+Hibernate: create table insumo_produto (preco numeric(38,2), id bigint generated by default as identity, insumo_id bigint not null, produto_id bigint not null, quantidade bigint, tipo enum ('G','KG','L','ML'), primary key (id))
+Hibernate: create table produto (ativo boolean, preco numeric(11,2) not null, id bigint generated by default as identity, nome varchar(30) not null unique, primary key (id))
+Hibernate: create table produto_componente (preco numeric(38,2), id bigint generated by default as identity, produto_filho_id bigint not null, produto_pai_id bigint not null, quantidade bigint, tipo enum ('G','KG','L','ML'), primary key (id))
+Hibernate: alter table if exists cliente_enderecos add constraint FK7np0bhcaligjyw5jn5gq2r1j1 foreign key (enderecos_id) references endereco_cliente
+Hibernate: alter table if exists cliente_enderecos add constraint FKbr7t5gnjf71hvnxhu13pdlu7p foreign key (cliente_id) references cliente
+Hibernate: alter table if exists insumo_produto add constraint FKak4o2q2jo8vym5y4ylhunt2ve foreign key (insumo_id) references insumo
+Hibernate: alter table if exists insumo_produto add constraint FKh2dkvudd4ctdqtsmew5clgxu foreign key (produto_id) references produto
+Hibernate: alter table if exists produto_componente add constraint FKtj38q8k3nfkjs3ph64o9m6n7h foreign key (produto_filho_id) references produto
+Hibernate: alter table if exists produto_componente add constraint FK6jseu398ig5l25h71wffia00v foreign key (produto_pai_id) references produto
+2026-07-27T17:14:59.066-03:00  INFO 43704 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-27T17:14:59.390-03:00  WARN 43704 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-27T17:14:59.696-03:00  INFO 43704 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:maricota_doces'
+2026-07-27T17:14:59.774-03:00  WARN 43704 --- [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-07-27T17:14:59.775-03:00  INFO 43704 --- [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: drop table if exists cliente cascade 
+Hibernate: drop table if exists cliente_enderecos cascade 
+Hibernate: drop table if exists configuracao cascade 
+Hibernate: drop table if exists endereco_cliente cascade 
+Hibernate: drop table if exists insumo cascade 
+Hibernate: drop table if exists insumo_produto cascade 
+Hibernate: drop table if exists produto cascade 
+Hibernate: drop table if exists produto_componente cascade 
+2026-07-27T17:14:59.782-03:00  INFO 43704 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-27T17:14:59.784-03:00  INFO 43704 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-27T17:14:59.795-03:00  INFO 43704 --- [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-27T17:14:59.809-03:00 ERROR 43704 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.086 s
+[INFO] Finished at: 2026-07-27T17:14:59-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.5.16:run (default-cli) on project maricota-doces: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
