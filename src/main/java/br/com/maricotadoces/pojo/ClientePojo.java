@@ -1,5 +1,9 @@
 package br.com.maricotadoces.pojo;
 
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import br.com.maricotadoces.domain.Cliente;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -13,7 +17,7 @@ public class ClientePojo {
         this.id = cliente.getId();
         this.nome = cliente.getNome();
 
-        cliente.getEnderecos().stream().findFirst().ifPresent(x -> this.endereco = new EnderecoClientePojo(x));
+        this.endereco = cliente.getEnderecos().stream().map(EnderecoClientePojo::new).collect(Collectors.toSet());
     }
 
     @Schema(description = "Id", accessMode = Schema.AccessMode.READ_ONLY)
@@ -23,6 +27,6 @@ public class ClientePojo {
     private String nome;
 
     @Schema(description = "Endereco", accessMode = Schema.AccessMode.READ_ONLY)
-    private EnderecoClientePojo endereco;
+    private Set<EnderecoClientePojo> endereco;
 
 }

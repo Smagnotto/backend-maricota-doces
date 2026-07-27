@@ -40,23 +40,18 @@ public class ClienteServiceImpl implements ListLikeService<ClientePojo, CreateCl
     public ClientePojo create(CreateClientePojo clientePojo) {
         Cliente cliente = new Cliente(clientePojo);
 
-        cliente.getEnderecos().add(new Endereco(clientePojo.getEndereco()));
-
         Cliente clienteSaved = repository.save(cliente);
         return new ClientePojo(clienteSaved);
     }
 
     @Override
-    public ClientePojo update(Long id, CreateClientePojo ClientePojo) {
-        // Cliente cliente = getClienteById(id);
+    public ClientePojo update(Long id, CreateClientePojo clientePojo) {
+        Cliente cliente = getClienteById(id);
 
-        // cliente.setNome(ClientePojo.getNome());
-        // cliente.setAtivo(ClientePojo.getAtivo());
-        // cliente.setPreco(ClientePojo.getPreco());
+        cliente.setNome(clientePojo.getNome());
 
-        // Cliente updateCliente = repository.save(cliente);
-        // return new ClientePojo(updateCliente);
-        return null;
+        Cliente updateCliente = repository.save(cliente);
+        return new ClientePojo(updateCliente);
     }
 
     @Override

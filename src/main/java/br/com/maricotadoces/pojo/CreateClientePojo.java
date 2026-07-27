@@ -1,5 +1,7 @@
 package br.com.maricotadoces.pojo;
 
+import java.util.Set;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,5 +14,5 @@ public class CreateClientePojo {
     private String nome;
 
     @Schema(description = "Enderecos", requiredMode = Schema.RequiredMode.REQUIRED)
-    private CreateEnderecoClientePojo endereco;
+    private Set<CreateEnderecoClientePojo> endereco;
 }
